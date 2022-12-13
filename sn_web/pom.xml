@@ -22,6 +22,12 @@
             <artifactId>sn_api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.tracker</groupId>
+            <artifactId>sn-web-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

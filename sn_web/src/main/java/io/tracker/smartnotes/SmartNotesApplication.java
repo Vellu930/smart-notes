@@ -1,22 +1,29 @@
 package io.tracker.smartnotes;
 
-import io.tracker.data.mappers.NoteDayMapper;
-import io.tracker.data.model.NoteDay;
-import org.apache.ibatis.type.MappedTypes;
-import org.mybatis.spring.annotation.MapperScan;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RestController;
 
-@MappedTypes(NoteDay.class)
-@MapperScan("io.tracker.data.mappers")
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.tracker.api.service.NoteDayQueryService;
+import io.tracker.api.service.NoteDayUpdateService;
+
+@Slf4j
+@RestController
 @SpringBootApplication
 public class SmartNotesApplication implements CommandLineRunner {
 
-	private NoteDayMapper mapper;
+	private NoteDayQueryService noteDayQueryService;
+	private NoteDayUpdateService updateService;
 
-	public SmartNotesApplication(NoteDayMapper mapper) {
-		this.mapper = mapper;
+	public SmartNotesApplication(NoteDayQueryService queryService, NoteDayUpdateService updateService) {
+		this.noteDayQueryService = queryService;
+		this.updateService = updateService;
 	}
 
 	public static void main(String[] args) {
@@ -26,8 +33,12 @@ public class SmartNotesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println(" ::::::::: Smart notes 2022 ::::::::: ");
-		System.out.println(this.mapper.getNotes().toString());
-		System.out.println(this.mapper.findByDay(3).toString());
+		List<LocalDate> dates = new ArrayList<>();
+		dates.add(LocalDate.of(2022, 10, 15));
+		noteDayQueryService.getNoteByDate(dates.get(0));
+		updateService.createNewNote(LocalDate.of(2022, 11,26), 12, 3, "Productive mood!", "Wrote some november Notes! Yey.");
+		noteDayQueryService.getAllNoteDays();
+
 	}
 
 }

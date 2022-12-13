@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Angular ###
+/.angular/cache/
+node_modules/
+bower_components/
+dist/
+tmp/
+app/**/*.js
+app/**/*.js.map
