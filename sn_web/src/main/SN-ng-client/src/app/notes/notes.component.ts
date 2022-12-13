@@ -19,7 +19,6 @@ export class NotesComponent implements OnInit {
   }
 
   getNotes() {
-    console.log("Getting notes from service...")
     this.noteService.getAllNotes().subscribe(n => this.notedays = n);
   }
 
