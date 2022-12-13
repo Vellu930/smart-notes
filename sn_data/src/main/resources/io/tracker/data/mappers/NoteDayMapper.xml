@@ -2,15 +2,28 @@
 <!--<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>-->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="io.tracker.data.mappers.NoteDayMapper">
     <select id="getNotes" resultType="io.tracker.data.model.NoteDay">
         SELECT * FROM noteday
     </select>
 
-    <select id="findByDay" resultType="io.tracker.data.model.NoteDay">
+    <select id="findByCycleDay" resultType="io.tracker.data.model.NoteDay">
         SELECT n.date, n.cycle_day, n.moon_day, n.mood, n.note
-        FROM public.noteday n
+        FROM noteday n
         WHERE n.cycle_day = #{cycleDay}
     </select>
+
+    <select id="getNoteByDate" resultType="io.tracker.data.model.NoteDay">
+        SELECT * FROM noteday n
+        WHERE n.date = #{localDate}
+    </select>
+
+    <insert id="createNewNote" parameterType="io.tracker.data.model.NoteDay">
+        INSERT INTO noteday (date, cycle_day, moon_day, mood, note)
+        VALUES (#{date}, #{cycleDay}, #{moonDay}, #{mood}, #{note})
+    </insert>
+
+    <delete id="deleteNote" parameterType="io.tracker.data.model.NoteDay">
+        DELETE FROM noteday WHERE #{date}=date
+    </delete>
 </mapper>
