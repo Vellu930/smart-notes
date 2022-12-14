@@ -12,10 +12,7 @@
   </div>
 </nav>
 
-<!-- sidebar start -->
-<!-- <div class="flex-row row bg-info"> -->
-<!-- <div class="min-vh-100 flex-column flex-md-row"> -->
-<!-- <div class="col p-0 bg-dark flex-column"> -->
+<!-- sidebar -->
 <nav class="navbar navbar-expand navbar-dark bg-dark d-flex flex-column align-item-center p-2" id="sidebar">
   <div class="container-fluid">
     <ul class="navbar-nav d-flex flex-column w-100 display-6">
@@ -23,7 +20,7 @@
         <a class="nav-link" routerLink="/dashboard">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/addNote">Write Note</a>
+        <a class="nav-link" routerLink="/newnote">Write Note</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/data">My Data</a>
@@ -33,16 +30,6 @@
 </nav>
 
 <!-- content  -->
-<section>
+<section class="content">
     <router-outlet></router-outlet>
 </section>
-
-<script>
-  var menu_btn = document.querySelector("#menu-btn")
-  var sidebar = document.querySelector("#sidebar")
-  var container = document.querySelector(".my-container")
-  menu_btn.addEventListener("click", () => {
-    sidebar.classList.toggle("active-nav")
-    container.classList.toggle("active-cont")
-  })
-</script>
