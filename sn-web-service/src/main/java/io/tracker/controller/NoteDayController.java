@@ -17,7 +17,7 @@ import io.tracker.api.service.NoteDayUpdateService;
 import io.tracker.data.model.NoteDay;
 
 @Slf4j
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @AllArgsConstructor
 public class NoteDayController {
@@ -41,7 +41,7 @@ public class NoteDayController {
         return this.queryService.getNotesByCycleDay(cycleDay);
     }
 
-    @PostMapping("/note/add")
+    @PostMapping("/new-note")
     public void addNewNoteDay(
             @RequestParam("date") String localDate,
             @RequestParam("cycle_day") int cycleDay,

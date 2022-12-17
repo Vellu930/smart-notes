@@ -7,18 +7,24 @@ import { AppComponent } from './app.component';
 import { NotesComponent } from './notes/notes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WriterComponent } from './writer/writer.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DataComponent } from './data/data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotesComponent,
-    DashboardComponent
+    DashboardComponent,
+    WriterComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

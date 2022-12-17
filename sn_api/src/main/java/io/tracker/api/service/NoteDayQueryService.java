@@ -1,11 +1,12 @@
 package io.tracker.api.service;
 
-import io.tracker.data.mappers.NoteDayMapper;
-import io.tracker.data.model.NoteDay;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import io.tracker.data.mappers.NoteDayMapper;
+import io.tracker.data.model.NoteDay;
 
 /**
  * Service for SELECTing from db, only queries of NoteDay
