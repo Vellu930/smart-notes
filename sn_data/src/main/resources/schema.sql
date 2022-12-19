@@ -2,7 +2,7 @@ drop table if exists noteday;
 
 create table noteday(
     id            SERIAL PRIMARY KEY,
-    date          DATE NOT NULL,
+    date          DATE NOT NULL unique,
     cycle_day     INTEGER,
     moon_day      INTEGER,
     mood          VARCHAR(150),
