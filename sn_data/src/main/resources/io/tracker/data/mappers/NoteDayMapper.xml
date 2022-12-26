@@ -3,17 +3,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="io.tracker.data.mappers.NoteDayMapper">
-    <select id="getNotes" resultType="io.tracker.data.model.NoteDay">
+    <resultMap id="mapNotes" type="io.tracker.data.model.NoteDay">
+        <id property="id" column="id"/>
+        <result property="date" column="date" />
+        <result property="cycleDay" column="cycle_day" />
+        <result property="moonDay" column="moon_day" />
+        <result property="note" column="note" />
+    </resultMap>
+
+    <select id="getNotes" resultMap="mapNotes">
         SELECT * FROM noteday
     </select>
 
-    <select id="findByCycleDay" resultType="io.tracker.data.model.NoteDay">
+    <select id="findByCycleDay" resultMap="mapNotes">
         SELECT n.date, n.cycle_day, n.moon_day, n.mood, n.note
         FROM noteday n
         WHERE n.cycle_day = #{cycleDay}
     </select>
 
-    <select id="getNoteByDate" resultType="io.tracker.data.model.NoteDay">
+    <select id="getNoteByDate" resultMap="mapNotes">
         SELECT * FROM noteday n
         WHERE n.date = #{localDate}
     </select>
@@ -23,7 +31,17 @@
         VALUES (#{date}, #{cycleDay}, #{moonDay}, #{mood}, #{note})
     </insert>
 
-    <delete id="deleteNote" parameterType="io.tracker.data.model.NoteDay">
+    <update id="updateNote" parameterType="io.tracker.data.model.NoteDay">
+        UPDATE noteday
+        SET date = #{date},
+        cycle_day = #{cycleDay},
+        moon_day = #{moonDay},
+        mood = #{mood},
+        note = #{note}
+        WHERE date = #{date}
+    </update>
+
+    <delete id="deleteNote">
         DELETE FROM noteday WHERE #{date}=date
     </delete>
 </mapper>

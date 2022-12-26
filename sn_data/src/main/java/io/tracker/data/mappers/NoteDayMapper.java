@@ -21,4 +21,6 @@ public interface NoteDayMapper {
 
     void deleteNote(@Param("date") LocalDate date);
 
+    void updateNote(@Param("date") LocalDate date, @Param("cycleDay") int cycleDay, @Param("moonDay") int moonDay,
+                    @Param("mood") String mood, @Param("note") String note);
 }
