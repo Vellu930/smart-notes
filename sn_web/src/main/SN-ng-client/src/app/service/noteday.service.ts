@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import { Noteday } from '../model/noteday';
 import { Observable } from 'rxjs';
-import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,7 @@ export class NotedayService {
     let params = new HttpParams()
       .set('date', note.date)
       .set('cycle_day', note.cycleDay)
-      .set('moon_day', 0)
+      .set('moon_day', note.moonDay)
       .set('mood', note.mood)
       .set('note', note.note);
 

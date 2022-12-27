@@ -2,28 +2,29 @@
     <h1>Writer</h1>
     <form [formGroup]="writeForm" (ngSubmit)="writeNote()">
         <div class="row">
-            <div class="mb-3 col-md-3">
+            <div class="mb-3 col-md-6 col-xl-3">
                 <label for="date" class="form-label">Date</label>
-                <input id="date" type="date" class="form-control" formControlName="dateControl">
+                <input id="date" type="date" class="form-control" formControlName="dateControl"
+                (change)="onDateChange($event)">
             </div>
-            <div class="mb-3 col-md-2">
+            <div class="mb-3 col-md-3 col-xl-2">
                 <label for="day-select" class="form-label">Day Number</label>
                 <select class="form-select" id="day-select" formControlName="dayControl">
                     <option *ngFor="let d of days">{{d}}</option>
                 </select>
             </div>
-            <div class="mb-3 col-sm-2">
-                <label for="text" class="form-label">Moon Day</label>
-                <input id="text" readonly type="text" class="form-control-plaintext">
+            <div class="mb-3 col-md-3 col-xl-2">
+                <label for="moon-day" class="form-label">Moon Day</label>
+                <input id="moon-day" type="text" class="form-control" formControlName="moonDayControl">
             </div>
         </div>
         <div class="mb-3">
-            <label for="text" class="form-label">Mood</label>
-            <input id="text" type="text" class="form-control" formControlName="moodControl">
+            <label for="mood-text" class="form-label">How are you today?</label>
+            <input id="mood-text" type="text" class="form-control" formControlName="moodControl">
         </div>
         <div class="mb-3">
             <label for="note-text" class="form-label">Your todays notes</label>
-            <textarea class="form-control" id="note-text" rows="20" formControlName="noteControl"></textarea>
+            <textarea class="form-control" id="note-text" rows="10" formControlName="noteControl"></textarea>
         </div>
         <button class="btn btn-dark m-5 w-25 h-25" type="button" (click)="writeNote()"> Save your note! </button>
     </form>
