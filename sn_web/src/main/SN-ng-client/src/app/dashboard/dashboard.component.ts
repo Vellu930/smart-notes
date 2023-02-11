@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Noteday } from '../model/noteday';
 import { NotedayService } from '../service/noteday.service';
 
@@ -12,7 +13,8 @@ export class DashboardComponent implements OnInit {
   notedays: Noteday[] = [];
   selectedNote: string = "";
 
-  constructor(private noteService: NotedayService) { }
+  constructor(private noteService: NotedayService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.noteService.getAllNotes().subscribe(n => {
@@ -21,6 +23,10 @@ export class DashboardComponent implements OnInit {
       });
       this.notedays = n
     });
+  }
+
+  openNoteEditing(date: string) {
+    this.router.navigate(["/newnote", {date : date}])
   }
 
   deleteNoteAction(d: string) {

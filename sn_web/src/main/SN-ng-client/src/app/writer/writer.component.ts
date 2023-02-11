@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CycleDays } from '../model/cycle';
 import { Noteday } from '../model/noteday';
 import { NotedayService } from '../service/noteday.service';
@@ -18,7 +19,8 @@ export class WriterComponent implements OnInit {
 
   constructor(private noteService: NotedayService,
     private fb: FormBuilder,
-    private dcalc: CycleDays) {
+    private dcalc: CycleDays,
+    private route: ActivatedRoute) {
     this.noteDay = {
       'date': formatDate(new Date(), 'yyyy-MM-dd', 'en'), // default is today's date
       'cycleDay': 0,      // by service or manual
@@ -39,9 +41,18 @@ export class WriterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // need to set date value in the datepicker, the later mthod takes data values from there
+    let dateSelectedOnDashboard = this.route.snapshot.params['date']
+    if (dateSelectedOnDashboard != null) {
+      this.date?.setValue(dateSelectedOnDashboard);
+    }
     this.setValuesFromExistingNote();
   }
 
+  /**
+   * when date changes, save current notes before opening other
+   * @param $event 
+   */
   onDateChange($event: Event) {
     console.log("changing date! " + this.writeForm.value.dateControl);
     // save note with previously saved date before opening different note
