@@ -17,7 +17,7 @@
             <td>{{note.note}}</td>
             <td class="p-1">
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-outline-dark m-1 w-50 btn-sm"> Edit </button>
+                <button type="button" class="btn btn-outline-dark m-1 w-50 btn-sm" (click)="openNoteEditing(note.date)"> Edit </button>
                 <button type="button" class="btn btn-outline-danger m-1 w-50 btn-sm" data-bs-toggle="modal"
                   data-bs-target="#deleteModal" (click)="selectedNote = note.date"> Delete </button>
               </div>
