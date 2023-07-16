@@ -1,6 +1,6 @@
-export interface Noteday {
+export interface NoteDay {
     date: string;
-    cycleDay: number;
+    day: number;
     moonDay: number;
     mood: string;
     note: string;

@@ -12,15 +12,15 @@ public interface NoteDayMapper {
 
     List<NoteDay> getNotes();
 
-    List<NoteDay> findByCycleDay(@Param("cycleDay") int cycleDay);
+    List<NoteDay> findByDay(@Param("day") int day);
 
     NoteDay getNoteByDate(@Param("localDate") LocalDate localDate);
 
-    void createNewNote(@Param("date") LocalDate date, @Param("cycleDay") int cycleDay, @Param("moonDay") int moonDay,
+    void createNewNote(@Param("date") LocalDate date, @Param("day") int day, @Param("moonDay") int moonDay,
                        @Param("mood") String mood, @Param("note") String note);
 
     void deleteNote(@Param("date") LocalDate date);
 
-    void updateNote(@Param("date") LocalDate date, @Param("cycleDay") int cycleDay, @Param("moonDay") int moonDay,
+    void updateNote(@Param("date") LocalDate date, @Param("day") int day, @Param("moonDay") int moonDay,
                     @Param("mood") String mood, @Param("note") String note);
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Noteday } from '../model/noteday';
-import { NotedayService } from '../service/noteday.service';
+import { NoteDay } from '../model/noteday';
+import { NoteDayService } from '../service/noteday.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +10,10 @@ import { NotedayService } from '../service/noteday.service';
 })
 export class DashboardComponent implements OnInit {
 
-  notedays: Noteday[] = [];
+  notedays: NoteDay[] = [];
   selectedNote: string = "";
 
-  constructor(private noteService: NotedayService,
+  constructor(private noteService: NoteDayService,
     private router: Router) { }
 
   ngOnInit(): void {

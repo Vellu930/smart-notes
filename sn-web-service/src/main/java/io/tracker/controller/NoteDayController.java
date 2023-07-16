@@ -36,19 +36,19 @@ public class NoteDayController {
         return this.queryService.getNoteByDate(LocalDate.parse(localDate));
     }
 
-    @GetMapping("/notes-cycle")
-    public List<NoteDay> getNotesByCycleDay(@RequestParam("cycle_day") int cycleDay) {
-        return this.queryService.getNotesByCycleDay(cycleDay);
+    @GetMapping("/notes-day")
+    public List<NoteDay> getNotesByDay(@RequestParam("day") int day) {
+        return this.queryService.getNotesByday(day);
     }
 
     @PostMapping("/new-note")
     public void addNewNoteDay(
             @RequestParam("date") String localDate,
-            @RequestParam("cycle_day") int cycleDay,
+            @RequestParam("day") int day,
             @RequestParam("moon_day") int moonDay,
             @RequestParam("mood") String mood,
             @RequestParam("note") String note) {
-        this.updateService.createNewNote(LocalDate.parse(localDate), cycleDay, moonDay, mood, note);
+        this.updateService.createNewNote(LocalDate.parse(localDate), day, moonDay, mood, note);
     }
 
     @DeleteMapping("/note/remove")

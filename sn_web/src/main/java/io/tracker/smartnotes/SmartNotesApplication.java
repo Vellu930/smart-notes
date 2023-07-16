@@ -32,7 +32,7 @@ public class SmartNotesApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(" ::::::::: Smart notes 2022 ::::::::: ");
+		System.out.println(" ::::::::: Smart notes 2023 ::::::::: ");
 		List<LocalDate> dates = new ArrayList<>();
 		dates.add(LocalDate.of(2022, 10, 15));
 		noteDayQueryService.getNoteByDate(dates.get(0));

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Noteday } from '../model/noteday';
-import { NotedayService } from '../service/noteday.service';
+import { NoteDay } from '../model/noteday';
+import { NoteDayService } from '../service/noteday.service';
 
 @Component({
   selector: 'app-notes',
@@ -9,9 +9,9 @@ import { NotedayService } from '../service/noteday.service';
 })
 export class NotesComponent implements OnInit {
 
-  notedays: Noteday[] = []
+  notedays: NoteDay[] = []
 
-  constructor(private noteService: NotedayService) {
+  constructor(private noteService: NoteDayService) {
    }
 
   ngOnInit(): void {

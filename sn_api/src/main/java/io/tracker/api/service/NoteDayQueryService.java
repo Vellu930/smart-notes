@@ -9,19 +9,16 @@ import io.tracker.data.mappers.NoteDayMapper;
 import io.tracker.data.model.NoteDay;
 
 /**
- * Service for SELECTing from db, only queries of NoteDay
+ * query service for {@link NoteDay} data
  */
 @AllArgsConstructor
 public class NoteDayQueryService {
     private NoteDayMapper noteDayMapper;
 
-    public List<NoteDay> getNotesByCycleDay(int cycleDay) {
-        return this.noteDayMapper.findByCycleDay(cycleDay);
+    public List<NoteDay> getNotesByday(int day) {
+        return this.noteDayMapper.findByDay(day);
     }
 
-    /**
-     * @return all NoteDay objects in DB for further detailed manipulation
-     */
     public List<NoteDay> getAllNoteDays() {
         return noteDayMapper.getNotes();
     }

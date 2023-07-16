@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
-import { Noteday } from '../model/noteday';
+import { NoteDay } from '../model/noteday';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotedayService {
+export class NoteDayService {
 
   private notesUrl: string;
   private noteUrl: string;
@@ -21,29 +21,29 @@ export class NotedayService {
 
    }
 
-   getAllNotes(): Observable<Noteday[]> {
-    return this.httpClient.get<Noteday[]>(this.notesUrl);
+   getAllNotes(): Observable<NoteDay[]> {
+    return this.httpClient.get<NoteDay[]>(this.notesUrl);
    }
 
-   getNoteByDate(date: string): Observable<Noteday> {
+   getNoteByDate(date: string): Observable<NoteDay> {
     const url = `${this.noteUrl}?date=${date}`;
-    return this.httpClient.get<Noteday>(url);
+    return this.httpClient.get<NoteDay>(url);
    }
 
-   writeNote(note: Noteday) {
+   writeNote(note: NoteDay) {
     let params = new HttpParams()
       .set('date', note.date)
-      .set('cycle_day', note.cycleDay)
+      .set('day', note.day)
       .set('moon_day', note.moonDay)
       .set('mood', note.mood)
       .set('note', note.note);
 
-    return this.httpClient.post<Noteday>(this.addNoteUrl, params);
+    return this.httpClient.post<NoteDay>(this.addNoteUrl, params);
    }
 
    removeNote(d: string) {
     const url = `${this.removeNoteUrl}?date=${d}`;
-    return this.httpClient.delete<Noteday>(url);
+    return this.httpClient.delete<NoteDay>(url);
    }
 
 }

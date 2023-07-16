@@ -2,9 +2,9 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { CycleDays } from '../model/cycle';
-import { Noteday } from '../model/noteday';
-import { NotedayService } from '../service/noteday.service';
+import { Days } from '../model/days';
+import { NoteDay } from '../model/noteday';
+import { NoteDayService } from '../service/noteday.service';
 
 @Component({
   selector: 'app-writer',
@@ -13,25 +13,25 @@ import { NotedayService } from '../service/noteday.service';
 })
 export class WriterComponent implements OnInit {
 
-  noteDay: Noteday;
+  noteDay: NoteDay;
   writeForm: FormGroup;
   days: number[];
 
-  constructor(private noteService: NotedayService,
+  constructor(private noteService: NoteDayService,
     private fb: FormBuilder,
-    private dcalc: CycleDays,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dcalc: Days) {
     this.noteDay = {
-      'date': formatDate(new Date(), 'yyyy-MM-dd', 'en'), // default is today's date
-      'cycleDay': 0,      // by service or manual
-      'moonDay': 0,       // this will be calculated by moon service
+      'date': formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+      'day': 0,
+      'moonDay': 0,
       'mood': "",
       'note': ""
     }
 
     this.writeForm = this.fb.group({
       dateControl: [this.noteDay.date],
-      dayControl: [this.noteDay.cycleDay],
+      dayControl: [this.noteDay.day],
       moonDayControl: [this.noteDay.moonDay],
       moodControl: [],
       noteControl: []
@@ -41,7 +41,7 @@ export class WriterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // need to set date value in the datepicker, the later mthod takes data values from there
+    // need to set date value in the datepicker, the later method takes data values from there
     let dateSelectedOnDashboard = this.route.snapshot.params['date']
     if (dateSelectedOnDashboard != null) {
       this.date?.setValue(dateSelectedOnDashboard);
@@ -51,7 +51,7 @@ export class WriterComponent implements OnInit {
 
   /**
    * when date changes, save current notes before opening other
-   * @param $event 
+   * @param $event
    */
   onDateChange($event: Event) {
     console.log("changing date! " + this.writeForm.value.dateControl);
@@ -61,15 +61,15 @@ export class WriterComponent implements OnInit {
     }
     this.setValuesFromExistingNote();
   }
-  
+
   private setValuesFromExistingNote() {
-    // check if the note for date exists
+    // check if the note for date already exists
     this.setDate();
     this.noteService.getNoteByDate(this.noteDay.date).subscribe(n => {
       if (n != null) {
         console.log("Found noteday from ws.");
         console.log(n);
-        this.day?.setValue(n.cycleDay);
+        this.day?.setValue(n.day);
         this.moonDay?.setValue(n.moonDay);
         this.mood?.setValue(n.mood);
         this.note?.setValue(n.note);
@@ -79,31 +79,31 @@ export class WriterComponent implements OnInit {
       this.writeForm.markAsPristine();
     });
   }
-  
+
   private clearForm() {
     this.day?.setValue(1);
     this.moonDay?.setValue(1);
     this.mood?.setValue('');
     this.note?.setValue('');
   }
-  
+
   writeNote() {
     this.assignValuesToNote();
     this.noteService.writeNote(this.noteDay).subscribe();
     console.log("note saved.");
   }
-  
+
   /**
    * assign form values to NoteDay, except date
    */
   private assignValuesToNote() {
     console.log("Setting note 1.");
-    this.noteDay.cycleDay = this.writeForm.value.dayControl;
+    this.noteDay.day = this.writeForm.value.dayControl;
     this.noteDay.moonDay = this.writeForm.value.moonDayControl;
     this.noteDay.mood = this.writeForm.value.moodControl;
     this.noteDay.note = this.writeForm.value.noteControl;
   }
-  
+
   /**
    * Set NoteDay date only when required.
    */
@@ -119,7 +119,7 @@ export class WriterComponent implements OnInit {
   get day() {
     return this.writeForm.get('dayControl');
   }
-  
+
   get moonDay() {
     return this.writeForm.get('moonDayControl');
   }
